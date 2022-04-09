@@ -1,0 +1,6 @@
+python-opencv
+pynetworktables
+flask
+waitress
+numpy
+flask-socketio

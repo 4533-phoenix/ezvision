@@ -4,7 +4,6 @@ import flask
 import os
 
 import network_vision
-import constants
 import logging
 import time
 
