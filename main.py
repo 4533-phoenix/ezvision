@@ -1,12 +1,12 @@
 import werkzeug.exceptions
 import network_vision
-import waitress
+import flask_socketio
 import logging
 import flask
 import time
 import os
 
-logging.basicConfig(level=logging.DEBUG)
+# logging.basicConfig(level=logging.DEBUG)
 
 SERVER_PATH = os.path.dirname(os.path.realpath(__file__))
 HOST = os.environ.get("HOST", "0.0.0.0")
@@ -15,8 +15,9 @@ NAME = "EZ Vision"
 
 os.chdir(SERVER_PATH)
 app = flask.Flask(__name__)
+socket = flask_socketio.SocketIO(app)
 
-vision1 = network_vision.ColoredBallsVision("", "frontCamera")
+# vision1 = network_vision.ColoredBallsVision("", "frontCamera")
 
 @app.errorhandler(werkzeug.exceptions.HTTPException)
 def page_not_found(error):
@@ -57,3 +58,4 @@ def get_app():
 
 if __name__ == "__main__":
     print(f"Server running on http://localhost:{PORT}/")
+    socket.run(app, host=HOST, port=PORT)

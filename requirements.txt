@@ -1,6 +1,7 @@
 opencv-python
 pynetworktables
 flask
-waitress
+eventlet
 numpy
 flask-socketio
+hiredis

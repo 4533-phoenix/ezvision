@@ -1,6 +1,8 @@
 <script lang="ts">
   // Use global this to change page from within page
 
+  import {HouseFill, LaptopFill, GearFill, CameraFill, InfoCircleFill} from "svelte-bootstrap-icons";
+
   import Error from "./pages/Error.svelte";
   import Blank from "./pages/Blank.svelte";
   import Home from "./pages/Home.svelte";
@@ -15,11 +17,11 @@
   globalThis.socket = io();
 
   const pages = {
-    "home": Home,
-    "system": System,
-    "settings": Settings,
-    "vision": Vision,
-    "about": About,
+    home: Home,
+    system: System,
+    settings: Settings,
+    vision: Vision,
+    about: About,
   };
   let page = window.location.hash.replace("#", "");
   let view = Blank;
@@ -36,62 +38,72 @@
     });
   };
   let changePage = () => {
-    if (page in pages) {view = pages[page]}
-    else {view = Error}
-  }
+    if (page in pages) {
+      view = pages[page];
+    } else {
+      view = Error;
+    }
+  };
   page = page || "home";
 
   let onPageLoad = () => {
     addPageListeners();
     changePage();
-  }
+  };
 </script>
 
 <svelte:window on:load={onPageLoad} />
 
 <svelte:head>
-  <link rel="stylesheet" href="/css/side_menu.css" />
+  <link rel="stylesheet" href="/css/sidebar.css" />
 </svelte:head>
 
 <main>
-  <div id="layout">
-    <a href="#menu" id="menuLink" class="menu-link">
-      <span />
+  <div class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark" style="width: 280px;">
+    <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+      <img width="100%" src={logo_name} alt="Logo" />
     </a>
-
-    <div id="menu">
-      <div class="pure-menu">
-        <a class="pure-menu-heading" href="#company">
-          <img width="100%" height="50%" src={logo_name} alt="Logo" />
+    <hr>
+    <ul class="nav nav-pills flex-column mb-auto">
+      <li class="nav-item">
+        <a href="#home" class="nav-link active" aria-current="page">
+          <HouseFill />
+          Home
         </a>
-
-        <ul class="pure-menu-list">
-          <li class="pure-menu-item">
-            <a href="#home" class="pure-menu-link">Home</a>
-          </li>
-          <li class="pure-menu-item">
-            <a href="#system" class="pure-menu-link">System</a>
-          </li>
-          <li class="pure-menu-item">
-            <a href="#settings" class="pure-menu-link">Settings</a>
-          </li>
-          <li class="pure-menu-item">
-            <a href="#vision" class="pure-menu-link">Vision</a>
-          </li>
-          <li class="pure-menu-item">
-            <a href="#about" class="pure-menu-link">About</a>
-          </li>
-        </ul>
-      </div>
-    </div>
-    <div id="main">
-      <svelte:component this={view} />
-    </div>
+      </li>
+      <li>
+        <a href="#system" class="nav-link text-white">
+          <LaptopFill />
+          System
+        </a>
+      </li>
+      <li>
+        <a href="#settings" class="nav-link text-white">
+          <GearFill />
+          Settings
+        </a>
+      </li>
+      <li>
+        <a href="#vision" class="nav-link text-white">
+          <CameraFill />
+          Vision
+        </a>
+      </li>
+      <li>
+        <a href="#about" class="nav-link text-white">
+          <InfoCircleFill />
+          About
+        </a>
+      </li>
+    </ul>
+  </div>
+  <div id="content">
+    <svelte:component this={view} />
   </div>
 </main>
 
 <style>
-  #main {
+  #content {
     margin: 10px;
   }
 </style>
