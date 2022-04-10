@@ -1,11 +1,10 @@
 import werkzeug.exceptions
-import waitress
-import flask
-import os
-
 import network_vision
+import waitress
 import logging
+import flask
 import time
+import os
 
 logging.basicConfig(level=logging.DEBUG)
 
@@ -58,4 +57,3 @@ def get_app():
 
 if __name__ == "__main__":
     print(f"Server running on http://localhost:{PORT}/")
-    waitress.serve(app, host=HOST, port=PORT)
