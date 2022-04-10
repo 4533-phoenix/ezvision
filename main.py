@@ -21,7 +21,7 @@ socket = flask_socketio.SocketIO(app)
 
 @app.errorhandler(werkzeug.exceptions.HTTPException)
 def page_not_found(error):
-    with open("./client/pages/error.thtml", "r") as file:
+    with open("./client/templates/error.thtml", "r") as file:
         data = file.read()
 
     return data.replace(
