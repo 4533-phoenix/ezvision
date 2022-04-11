@@ -1,5 +1,4 @@
 <script lang="ts">
-  import {faHouse, faLaptop, faGear, faCamera, faCircleInfo} from '@fortawesome/free-solid-svg-icons';
   import Fa from 'svelte-fa';
   import manifest from "./pages/manifest";
   import io from "socket.io-client";
@@ -12,7 +11,7 @@
     let page = globalThis.page;
 
     document.querySelectorAll("a").forEach((element) => {
-      if (element.classList.contains("spa-added")) {
+      if (element.classList.contains("spa-added") || !element.href.includes("#")) {
         return;
       }
 
@@ -21,6 +20,7 @@
         if ("href" in event.target) {
           const target = event.target as HTMLAnchorElement;
           const href = target.href;
+          
           globalThis.page = href.substring(href.indexOf("#") + 1);
           globalThis.changePage();
         }
@@ -35,12 +35,7 @@
     }
   };
 
-  let icons = {faHouse: faHouse, faLaptop: faLaptop, faGear: faGear, faCamera: faCamera, faCircleInfo: faCircleInfo}
   let view = manifest.blank.view;
-  let convertIconName = (string: String) => {
-    string = string.replace(/-([a-z])/g, (g: String) => {return g[1].toUpperCase()});
-    return "fa" + string.charAt(0).toUpperCase() + string.slice(1);
-  };
 
   afterUpdate(() => {
     globalThis.addPageListeners();
@@ -72,7 +67,7 @@
       {#each Object.entries(manifest).filter(item => {return item[1].menu}) as [page, data]}
         <li class="nav-item">
           <a href="#{page}" class="nav-link {data.active ? "active" : "text-white"}" aria-current="page">
-            <Fa icon={icons[convertIconName(data.icon)]}/>
+            <Fa icon={data.icon}/>
             {data.name}
           </a>
         </li>

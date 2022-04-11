@@ -1,4 +1,9 @@
 <script lang="ts">
-    const socket = globalThis.socket;
-    const view = globalThis.view;
+  import { afterUpdate } from "svelte";
+
+  let socket = globalThis.socket;
+
+  afterUpdate(() => {
+    globalThis.addPageListeners();
+  });
 </script>

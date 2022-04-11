@@ -1,3 +1,5 @@
+import {faHouse, faLaptop, faGear, faCamera, faCircleInfo,faX} from '@fortawesome/free-solid-svg-icons';
+
 import Error from "./Error.svelte";
 import Blank from "./Blank.svelte";
 import Home from "./Home.svelte";
@@ -12,48 +14,48 @@ export default {
     menu: true,
     active: true,
     name: "Home",
-    icon: "house"
+    icon: faHouse
   },
   system: {
     view: System,
     menu: true,
     active: false,
     name: "System",
-    icon: "laptop"
+    icon: faLaptop
   },
   settings: {
     view: Settings,
     menu: true,
     active: false,
     name: "Settings",
-    icon: "gear"
+    icon: faGear
   },
   vision: {
     view: Vision,
     menu: true,
     active: false,
     name: "Vision",
-    icon: "camera"
+    icon: faCamera
   },
   about: {
     view: About,
     menu: true,
     active: false,
     name: "About",
-    icon: "circle-info"
+    icon: faCircleInfo
   },
   error: {
     view: Error,
     menu: false,
     active: false,
     name: "Error",
-    icon: ""
+    icon: faX
   },
   blank: {
     view: Blank,
     menu: false,
     active: false,
     name: "Blank",
-    icon: ""
+    icon: faX
   }
 };
