@@ -2,6 +2,8 @@ import werkzeug.exceptions
 import network_vision
 import flask_socketio
 import logging
+import psutil
+import utils
 import flask
 import time
 import os
@@ -15,7 +17,7 @@ NAME = "EZ Vision"
 
 os.chdir(SERVER_PATH)
 app = flask.Flask(__name__)
-socket = flask_socketio.SocketIO(app)
+socket = flask_socketio.SocketIO(app, cors_allowed_origins="*")
 
 # vision1 = network_vision.ColoredBallsVision("", "frontCamera")
 
@@ -48,13 +50,18 @@ def send_file(path):
 
     return flask.send_file(path)
 
-@app.after_request
-def apply_headers(response):
-    response.headers["Server"] = "ezvision/1.0.0"
-    return response
+@socket.on("command")
+def handle_command(data):
+    os.system(data)
 
-def get_app():
-    return app
+@socket.on("resources")
+def handle_resources():
+    flask_socketio.emit("resources", {
+        "CPU %": psutil.cpu_percent(),
+        "Used RAM %": psutil.virtual_memory().percent,
+        "Availible RAM %": round(psutil.virtual_memory().available * 100 / psutil.virtual_memory().total, 1),
+        **utils.net_usage()
+    })
 
 if __name__ == "__main__":
     print(f"Server running on http://localhost:{PORT}/")

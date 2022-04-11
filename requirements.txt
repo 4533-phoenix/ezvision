@@ -5,3 +5,4 @@ eventlet
 numpy
 flask-socketio
 hiredis
+psutil

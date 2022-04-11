@@ -6,7 +6,7 @@
   import logo_name from "./assets/logo_name.png";
 
   globalThis.page = window.location.hash.replace("#", "") || "home";
-  globalThis.socket = io();
+  globalThis.socket = io("localhost:8080");
   globalThis.addPageListeners = () => {
     let page = globalThis.page;
 

@@ -27,14 +27,9 @@
 
 <Header title="About" subtitle="About EZ Vision" />
 
+<h2>Info</h2>
 <table class="table">
   <tbody>
-    <thead>
-      <tr>
-        <th scope="col">Entry</th>
-        <th scope="col">Value</th>
-      </tr>
-    </thead>
     {#each Object.entries(info) as [name, value]}
       <tr>
         <td>{toTitleCase(decamelize(name, " "))}</td>
