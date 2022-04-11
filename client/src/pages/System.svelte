@@ -29,7 +29,7 @@
 
 <Header title="System" subtitle="Control/View the System" />
 
-<h2>Stats</h2>
+<h3>Stats</h3>
 <table class="table">
   <tbody>
     {#each Object.entries(resources) as [name, value]}

@@ -27,7 +27,7 @@
 
 <Header title="About" subtitle="About EZ Vision" />
 
-<h2>Info</h2>
+<h3>Info</h3>
 <table class="table">
   <tbody>
     {#each Object.entries(info) as [name, value]}

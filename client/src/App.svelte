@@ -63,7 +63,7 @@
       href="/"
       class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none"
     >
-      <img width="100%" src={logo_name} alt="Logo" id="logo" />
+      <img width="100%" src={logo_name} alt="Logo Name" id="logo" />
     </a>
     <hr />
     <ul class="nav nav-pills flex-column mb-auto">
