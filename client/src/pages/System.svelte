@@ -2,14 +2,19 @@
   import { afterUpdate } from "svelte";
   import Header from "../lib/Header.svelte";
 
-  let resources = {}
+  let resources = {};
   let socket = globalThis.socket;
   let reboot = () => {
     socket.emit("command", "sudo reboot now");
-  }
+  };
+  let run = () => {
+    socket.emit("command", window.prompt("Command"));
+  };
   let requestResources = () => {
-    socket.emit("resources")
-  }
+    if (!document.hidden) {
+      socket.emit("resources");
+    }
+  };
 
   socket.on("resources", (data: JSON) => {
     resources = data;
@@ -22,8 +27,7 @@
   setInterval(requestResources, 1000);
 </script>
 
-<Header title="System" subtitle="Control/View the System"/>
-
+<Header title="System" subtitle="Control/View the System" />
 
 <h2>Stats</h2>
 <table class="table">
@@ -38,3 +42,4 @@
 </table>
 
 <button type="button" class="btn btn-danger" on:click={reboot}>Reboot</button>
+<button type="button" class="btn btn-danger" on:click={run}>Run</button>
