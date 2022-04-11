@@ -1,8 +1,8 @@
 <script lang="ts">
-  import Fa from 'svelte-fa';
+  import Fa from "svelte-fa";
   import manifest from "./pages/manifest";
   import io from "socket.io-client";
-  import {onMount, afterUpdate} from "svelte";
+  import { onMount, afterUpdate } from "svelte";
   import logo_name from "./assets/logo_name.png";
 
   globalThis.page = window.location.hash.replace("#", "") || "home";
@@ -11,16 +11,19 @@
     let page = globalThis.page;
 
     document.querySelectorAll("a").forEach((element) => {
-      if (element.classList.contains("spa-added") || !element.href.includes("#")) {
+      if (
+        element.classList.contains("spa-added") ||
+        !element.href.includes("#")
+      ) {
         return;
       }
 
-      element.classList.add("spa-added")
+      element.classList.add("spa-added");
       element.addEventListener("click", (event) => {
         if ("href" in event.target) {
           const target = event.target as HTMLAnchorElement;
           const href = target.href;
-          
+
           globalThis.page = href.substring(href.indexOf("#") + 1);
           globalThis.changePage();
         }
@@ -64,10 +67,16 @@
     </a>
     <hr />
     <ul class="nav nav-pills flex-column mb-auto">
-      {#each Object.entries(manifest).filter(item => {return item[1].menu}) as [page, data]}
+      {#each Object.entries(manifest).filter((item) => {
+        return item[1].menu;
+      }) as [page, data]}
         <li class="nav-item">
-          <a href="#{page}" class="nav-link {data.active ? "active" : "text-white"}" aria-current="page">
-            <Fa icon={data.icon}/>
+          <a
+            href="#{page}"
+            class="nav-link {data.active ? 'active' : 'text-white'}"
+            aria-current="page"
+          >
+            <Fa icon={data.icon} />
             {data.name}
           </a>
         </li>
@@ -86,5 +95,6 @@
 
   #content {
     margin: 10px;
+    width: 100%;
   }
 </style>
