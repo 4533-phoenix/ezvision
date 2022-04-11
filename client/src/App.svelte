@@ -1,10 +1,9 @@
 <script lang="ts">
-  // Use global this to change page from within page
-
+  import {faHouse, faLaptop, faGear, faCamera, faCircleInfo} from '@fortawesome/free-solid-svg-icons';
+  import Fa from 'svelte-fa';
   import manifest from "./pages/manifest";
   import io from "socket.io-client";
   import {onMount, afterUpdate} from "svelte";
-
   import logo_name from "./assets/logo_name.png";
 
   globalThis.page = window.location.hash.replace("#", "") || "home";
@@ -36,7 +35,12 @@
     }
   };
 
+  let icons = {faHouse: faHouse, faLaptop: faLaptop, faGear: faGear, faCamera: faCamera, faCircleInfo: faCircleInfo}
   let view = manifest.blank.view;
+  let convertIconName = (string: String) => {
+    string = string.replace(/-([a-z])/g, (g: String) => {return g[1].toUpperCase()});
+    return "fa" + string.charAt(0).toUpperCase() + string.slice(1);
+  };
 
   afterUpdate(() => {
     globalThis.addPageListeners();
@@ -61,14 +65,14 @@
       href="/"
       class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none"
     >
-      <img width="100%" src={logo_name} alt="Logo" />
+      <img width="100%" src={logo_name} alt="Logo" id="logo" />
     </a>
     <hr />
     <ul class="nav nav-pills flex-column mb-auto">
       {#each Object.entries(manifest).filter(item => {return item[1].menu}) as [page, data]}
         <li class="nav-item">
           <a href="#{page}" class="nav-link {data.active ? "active" : "text-white"}" aria-current="page">
-            <i class="{data.icon}"></i>
+            <Fa icon={icons[convertIconName(data.icon)]}/>
             {data.name}
           </a>
         </li>
@@ -81,6 +85,10 @@
 </main>
 
 <style>
+  #logo {
+    image-rendering: pixelated;
+  }
+
   #content {
     margin: 10px;
   }

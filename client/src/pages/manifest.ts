@@ -12,35 +12,35 @@ export default {
     menu: true,
     active: true,
     name: "Home",
-    icon: "house-fill"
+    icon: "house"
   },
   system: {
     view: System,
     menu: true,
     active: false,
     name: "System",
-    icon: "laptop-fill"
+    icon: "laptop"
   },
   settings: {
     view: Settings,
     menu: true,
     active: false,
     name: "Settings",
-    icon: "gear-fill"
+    icon: "gear"
   },
   vision: {
     view: Vision,
     menu: true,
     active: false,
     name: "Vision",
-    icon: "camera-fill"
+    icon: "camera"
   },
   about: {
     view: About,
     menu: true,
     active: false,
     name: "About",
-    icon: "info-circle-fill"
+    icon: "circle-info"
   },
   error: {
     view: Error,
